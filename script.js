@@ -36,6 +36,9 @@ function mostrarSecao(secao) {
     // esconde todas as secoes
     document.getElementById("cadastro").classList.add("hidden");
     document.getElementById("consulta").classList.add("hidden");
+    document.getElementById("venda").classList.add("hidden");
+    document.getElementById("alterar").classList.add("hidden");
+    document.getElementById("relatorio-vendas").classList.add("hidden");
 
     //mostrar a seçao selecionada 
     document.getElementById(secao).classList.remove("hidden");
@@ -92,3 +95,85 @@ function atualizarLista(lista = Pizzaria) {
   alert("Pizza não encontrada.");
  }
 }
+
+// --- Registro de Vendas ---
+let vendas = [];
+
+function registrarVenda() {
+  const nome = document.getElementById("venda-nome").value;
+  const quantidade = parseInt(
+    document.getElementById("venda-quantidade").value
+  );
+  const comprador = document.getElementById("venda-comprador").value;
+
+  if (nome && quantidade && comprador) {
+    const pizza = Pizzaria.find(
+      (pizza) => pizza.nome.toLowerCase() === nome.toLowerCase()
+    );
+
+    if (pizza) {
+      const total = pizza.preco * quantidade;
+      vendas.push({ nome: pizza.nome, quantidade, comprador, total });
+
+      const listaVendas = document.getElementById("lista-vendas");
+      const item = document.createElement("li");
+      item.textContent = `Pizza: ${
+        pizza.nome
+      }, Quantidade: ${quantidade}, Comprador: ${comprador}, Total: R$ ${total.toFixed(
+        2
+      )}`;
+      listaVendas.appendChild(item);
+
+      exibirMensagem("Venda registrada com sucesso!", "sucesso");
+      document.getElementById("venda-nome").value = "";
+      document.getElementById("venda-quantidade").value = "";
+      document.getElementById("venda-comprador").value = "";
+    } else {
+      exibirMensagem("Pizza não encontrada no cardápio.", "erro");
+    }
+  } else {
+    exibirMensagem("Por favor, preencha todos os campos.", "erro");
+  }
+}
+
+// --- Relatório de Vendas ---
+function gerarRelatorioVendas() {
+  const tabelaRelatorio = document.getElementById("tabela-relatorio-vendas");
+  tabelaRelatorio.innerHTML = "";
+
+    document.getElementById("cadastro").classList.add("hidden");
+    document.getElementById("consulta").classList.add("hidden");
+    document.getElementById("venda").classList.add("hidden");
+    document.getElementById("alterar").classList.add("hidden");
+
+  if (vendas.length === 0) {
+    exibirMensagem("Nenhuma venda registrada.", "erro");
+    return;
+  }
+
+  let totalVendas = 0;
+
+  vendas.forEach((venda) => {
+    const linha = document.createElement("tr");
+    linha.innerHTML = `
+        <td>${venda.nome}</td>
+        <td>${venda.quantidade}</td>
+        <td>${venda.comprador}</td>
+        <td>R$ ${venda.total.toFixed(2)}</td>
+      `;
+    tabelaRelatorio.appendChild(linha);
+
+    totalVendas += venda.total;
+  });
+
+  const linhaTotal = document.createElement("tr");
+  linhaTotal.innerHTML = `
+      <td><strong>Total</strong></td>
+      <td></td>
+      <td></td>
+      <td><strong>R$ ${totalVendas.toFixed(2)}</strong></td>
+    `;
+  tabelaRelatorio.appendChild(linhaTotal);
+
+    document.getElementById("relatorio-vendas").classList.remove("hidden");
+  }
