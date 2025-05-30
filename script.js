@@ -1,9 +1,9 @@
 function exibirMensagem(texto,tipo) {
  const mensagem = document.getElementById("mensagem");
- mensagem.textContent = texto;
+ mensagem.innerHTML = texto;
  // Adiciona a classe de estilo(sucesso ou erro)
   mensagem.className = `mensagem ${tipo}`;
-  mensagem.classList.remove= ("hidden");
+  mensagem.classList.remove("hidden");
 
   // Remove a classe de erro após 3 segundos
   setTimeout(() => {
@@ -80,20 +80,47 @@ function atualizarLista(lista = Pizzaria) {
     }
 
  function buscarPizzaParaAlterar() {
-   const busca =document.getElementById("busca-alterar").value.toLowerCase();
-   PizzaParaAlterar= Pizzaria.find((Pizza) => 
+   const busca = document.getElementById("busca-alterar").value.toLowerCase();
+   let PizzaParaAlterar= Pizzaria.find((Pizza) => 
    Pizza.nome.toLowerCase().includes(busca)
  );
 
  if (PizzaParaAlterar) {
-   document.getElementById("form-alterar").classList.remove("hidden");
+    document.getElementById("form-alterar").classList.remove("hidden");
    document.getElementById("novo-nome").value=PizzaParaAlterar.nome;
-     document.getElementById("novo-descricao").value=PizzaParaAlterar.descricao;
+     document.getElementById("novos-ingredientes").value= PizzaParaAlterar.descricao;
        document.getElementById("novo-preco").value=PizzaParaAlterar.preco;
+  
  }
+
  else {
-  alert("Pizza não encontrada.");
+  exibirMensagem("Pizza não encontrada.", "erro");
  }
+}
+function alterarPizza() {
+  const busca = document.getElementById("busca-alterar").value.toLowerCase();
+  const novoNome = document.getElementById("novo-nome").value;
+  const novosIngredientes = document.getElementById("novos-ingredientes").value;
+  const novoPreco = parseFloat(document.getElementById("novo-preco").value);
+
+  let pizza = Pizzaria.find((p) => p.nome.toLowerCase().includes(busca));
+
+  if (pizza && novoNome && novosIngredientes && !isNaN(novoPreco)) {
+    pizza.nome = novoNome;
+    pizza.descricao = novosIngredientes;
+    pizza.preco = novoPreco;
+    
+   
+     atualizarLista();
+        
+    // document.getElementById("busca-alterar").value = "";
+     document.getElementById("busca-alterar").classList.add("hidden");
+    document.getElementById("mensagem").innerHTML = ("Pizza alterada com sucesso!")
+  } else {
+    document.getElementById("mensagem").innerHTML = ("Preencha todos os campos corretamente.");
+   
+  }
+ 
 }
 
 // --- Registro de Vendas ---
