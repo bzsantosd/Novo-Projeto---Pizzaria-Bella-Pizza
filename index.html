@@ -11,7 +11,7 @@
     <title>Pizzaria da Beatriz</title>
 <body>
 <div class="container">
-    <h1>Bem-Vindos a Pizzaria Bella Pizza!</h1>
+    <h1>Pizzaria Bella Pizza!</h1>
   <div class="menu">
         <button onclick="mostrarSecao('cadastro')">
             <i class="fa-solid fa-pizza-slice"></i> Cadastrar Pizza
@@ -45,8 +45,9 @@
             <input type="text" id="descricao" placeholder="Digite a descrição da pizza">
     </div>
     <button onclick="criarCadastro()">Confirmar</button>
-    <label id="mensagem"></label>
+    <label id="mensagem-cadastro"></label>
   </div>
+
   <!-- Seçao de consulta -->
   <div id="consulta" class="hidden">
     <h2>Consultar Pizzas</h2>
@@ -85,7 +86,7 @@
         </div>
         <button onclick="alterarPizza()">Salvar Alterações</button>
       </div>
-      <label id="mensagem"></label>
+      <label id="mensagem-alterar"></label>
     </div>
 
     <!-- Seção de Venda -->

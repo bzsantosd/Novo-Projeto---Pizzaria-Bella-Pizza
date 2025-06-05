@@ -8,14 +8,16 @@ body {
     color: #fefefe;
 }
 
-.container {
-    max-width: 800px;
-    margin: auto;
-    background: ;
-    padding: 20px;
-    border-radius: 8px;
-
-}
+  .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        
+        }
 
 h1,
 h2 {
@@ -36,7 +38,7 @@ h2 {
     border: none;
     border-radius: 5px;
     background-color: #1e8449;
-    color: white;
+    color: #fefefe;
     font-size: 20px;
     transition: background-color 0.3s;
     font-family: 'Ubuntu', Verdana, Geneva, Tahoma, sans-serif;
@@ -62,7 +64,7 @@ button {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid #fefefe;
     border-radius: 5px;
     font-size: 14px;
     font-family: 'Ubuntu', Verdana, Geneva, Tahoma, sans-serif;
@@ -70,7 +72,7 @@ button {
 
 button {
     background-color: #1e8449;
-    color: white;
+    color: #fefefe;
     cursor: pointer;
     transition: background-color 0.3s;
     font-family: 'Ubuntu', Verdana, Geneva, Tahoma, sans-serif;
@@ -95,7 +97,7 @@ td {
 
 th {
     background-color: #1e8449;
-    color: white;
+    color: #fefefe;
 }
 
 .hidden {
@@ -131,8 +133,8 @@ th {
  }
         
 #login button {
-     background-color: #1e8449;
-     color: white;
+     background-color: #ff6a00;
+     color: #fefefe;
      border: none;
      padding: 10px 20px;
      font-size: 1rem;

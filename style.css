@@ -8,14 +8,16 @@ body {
     color: #fefefe;
 }
 
-.container {
-    max-width: 800px;
-    margin: auto;
-    background: ;
-    padding: 20px ;
-    border-radius: 8px;
-
-}
+  .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        
+        }
 
 h1,
 h2 {
@@ -36,7 +38,7 @@ h2 {
     border: none;
     border-radius: 5px;
     background-color: #ff6a00;
-    color: white;
+    color: #fefefe;
     font-size: 20px;
     transition: background-color 0.3s;
     font-family: 'Ubuntu', Verdana, Geneva, Tahoma, sans-serif;
@@ -62,15 +64,15 @@ button {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid #fefefe;
     border-radius: 5px;
     font-size: 14px;
     font-family: 'Ubuntu', Verdana, Geneva, Tahoma, sans-serif;
 }
 
 button {
-    background-color: #1e8449;
-    color: white;
+    background-color: #ff6a00;
+    color: #fefefe;
     cursor: pointer;
     transition: background-color 0.3s;
     font-family: 'Ubuntu', Verdana, Geneva, Tahoma, sans-serif;
@@ -95,7 +97,7 @@ td {
 
 th {
     background-color: #1e8449;
-    color: white;
+    color: #fefefe;
 }
 
 .hidden {
@@ -104,4 +106,43 @@ th {
 
 .icon {
     margin-right: 5px;
+}
+
+ #login {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+   
+}
+        
+#login h1,
+#login h2 {
+    margin-bottom: 20px;
+  }
+        
+#login input {
+     width: calc(100% - 20px);
+     padding: 10px;
+     margin-bottom: 15px;
+     border-radius: 5px;
+     font-size: 1rem;
+     background-color: #fefefe;
+
+     color: #333;
+     text-align: center;
+ }
+        
+#login button {
+     background-color: #ff6a00;
+     color: #fefefe;
+     border: none;
+     padding: 10px 20px;
+     font-size: 1rem;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+  }
+        
+#login button:hover {
+     background-color: #1e8449;
 }

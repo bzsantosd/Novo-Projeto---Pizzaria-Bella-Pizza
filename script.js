@@ -44,19 +44,20 @@ function mostrarSecao(secao) {
     document.getElementById(secao).classList.remove("hidden");
 }
 function criarCadastro() {
-    const nome = document.getElementById("nome").value;
-    const preco = parseFloat(document.getElementById("preco").value);
-    const descricao = document.getElementById("descricao").value;
+  const nome = document.getElementById("nome").value;
+  const preco = parseFloat(document.getElementById("preco").value);
+  const descricao = document.getElementById("descricao").value;
 
-    if (nome && preco && descricao) {
-      Pizzaria.push({ nome, preco, descricao });
-      document.getElementById("nome").value = "";
-      document.getElementById("preco").value = "";
-      document.getElementById("descricao").value = "";
-    //   atualizarLista();
-      document.getElementById("mensagem").innerHTML = ("Pizza adicionada com sucesso!");
-
-}
+  if (nome && preco && descricao) {
+    Pizzaria.push({ nome, preco, descricao });
+    document.getElementById("nome").value = "";
+    document.getElementById("preco").value = "";
+    document.getElementById("descricao").value = "";
+    atualizarLista();
+    exibirMensagem("Pizza adicionada com sucesso!", "sucesso");
+  } else {
+    exibirMensagem("Preencha todos os campos corretamente.", "erro");
+  }
 }
 
 function atualizarLista(lista = Pizzaria) {
@@ -73,30 +74,29 @@ function atualizarLista(lista = Pizzaria) {
       tabela.appendChild(linha);
   });
 }
-   function buscarPizza(){
-        const busca = document.getElementById("busca").value.toLowerCase();
-        const resultado = Pizzaria.filter((Pizza) => Pizza.nome.toLowerCase().includes(busca));
-    atualizarLista(resultado);
-    }
 
- function buscarPizzaParaAlterar() {
-   const busca = document.getElementById("busca-alterar").value.toLowerCase();
-   let PizzaParaAlterar= Pizzaria.find((Pizza) => 
-   Pizza.nome.toLowerCase().includes(busca)
- );
-
- if (PizzaParaAlterar) {
-    document.getElementById("form-alterar").classList.remove("hidden");
-   document.getElementById("novo-nome").value=PizzaParaAlterar.nome;
-     document.getElementById("novos-ingredientes").value= PizzaParaAlterar.descricao;
-       document.getElementById("novo-preco").value=PizzaParaAlterar.preco;
-  
- }
-
- else {
-  exibirMensagem("Pizza não encontrada.", "erro");
- }
+function buscarPizza(){
+  const busca = document.getElementById("busca").value.toLowerCase();
+  const resultado = Pizzaria.filter((Pizza) => Pizza.nome.toLowerCase().includes(busca));
+  atualizarLista(resultado);
 }
+
+function buscarPizzaParaAlterar() {
+  const busca = document.getElementById("busca-alterar").value.toLowerCase();
+  let PizzaParaAlterar = Pizzaria.find((Pizza) => 
+    Pizza.nome.toLowerCase().includes(busca)
+  );
+
+  if (PizzaParaAlterar) {
+    document.getElementById("form-alterar").classList.remove("hidden");
+    document.getElementById("novo-nome").value = PizzaParaAlterar.nome;
+    document.getElementById("novos-ingredientes").value = PizzaParaAlterar.descricao;
+    document.getElementById("novo-preco").value = PizzaParaAlterar.preco;
+  } else {
+    exibirMensagem("Pizza não encontrada.", "erro");
+  }
+}
+
 function alterarPizza() {
   const busca = document.getElementById("busca-alterar").value.toLowerCase();
   const novoNome = document.getElementById("novo-nome").value;
@@ -109,18 +109,18 @@ function alterarPizza() {
     pizza.nome = novoNome;
     pizza.descricao = novosIngredientes;
     pizza.preco = novoPreco;
-    
-   
-     atualizarLista();
-        
-    // document.getElementById("busca-alterar").value = "";
-     document.getElementById("busca-alterar").classList.add("hidden");
-    document.getElementById("mensagem").innerHTML = ("Pizza alterada com sucesso!")
+
+    atualizarLista();
+
+    document.getElementById("form-alterar").classList.add("hidden");
+    exibirMensagem("Pizza alterada com sucesso!", "sucesso");
+    // Transição automática para alteracao após consulta
+    setTimeout(() => {
+      mostrarSecao("venda");
+    }, 1000);
   } else {
-    document.getElementById("mensagem").innerHTML = ("Preencha todos os campos corretamente.");
-   
+    exibirMensagem("Preencha todos os campos corretamente.", "erro");
   }
- 
 }
 
 // --- Registro de Vendas ---
@@ -155,6 +155,11 @@ function registrarVenda() {
       document.getElementById("venda-nome").value = "";
       document.getElementById("venda-quantidade").value = "";
       document.getElementById("venda-comprador").value = "";
+
+      // Transição automática para relatório de vendas após registrar venda
+      setTimeout(() => {
+        gerarRelatorioVendas();
+      }, 1000);
     } else {
       exibirMensagem("Pizza não encontrada no cardápio.", "erro");
     }
@@ -168,10 +173,10 @@ function gerarRelatorioVendas() {
   const tabelaRelatorio = document.getElementById("tabela-relatorio-vendas");
   tabelaRelatorio.innerHTML = "";
 
-    document.getElementById("cadastro").classList.add("hidden");
-    document.getElementById("consulta").classList.add("hidden");
-    document.getElementById("venda").classList.add("hidden");
-    document.getElementById("alterar").classList.add("hidden");
+  document.getElementById("cadastro").classList.add("hidden");
+  document.getElementById("consulta").classList.add("hidden");
+  document.getElementById("venda").classList.add("hidden");
+  document.getElementById("alterar").classList.add("hidden");
 
   if (vendas.length === 0) {
     exibirMensagem("Nenhuma venda registrada.", "erro");
@@ -202,5 +207,20 @@ function gerarRelatorioVendas() {
     `;
   tabelaRelatorio.appendChild(linhaTotal);
 
-    document.getElementById("relatorio-vendas").classList.remove("hidden");
+  document.getElementById("relatorio-vendas").classList.remove("hidden");
+}
+
+// Transição automática para consulta após cadastro
+const originalCriarCadastro = criarCadastro;
+criarCadastro = function() {
+  originalCriarCadastro();
+  if (
+    document.getElementById("nome").value === "" &&
+    document.getElementById("preco").value === "" &&
+    document.getElementById("descricao").value === ""
+  ) {
+    setTimeout(() => {
+      mostrarSecao("consulta");
+    }, 1000);
   }
+};
