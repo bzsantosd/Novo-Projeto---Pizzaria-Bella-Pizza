@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <title>Pizzaria da Beatriz</title>
+</head>
+<body>
+<div class="container">
+    <h1>Bem-Vindos a Pizzaria Bella Pizza!</h1>
+    <div class="menu">
+        <button onclick="mostrarSecao('cadastro')">
+            <i class="fa-solid fa-user-plus"></i> Cadastro
+        </button>
+        <button onclick="mostrarSecao('menu')">
+            <i class="fa-solid fa-pizza-slice"></i> Cardápio
+        </button>
+         <button onclick="mostrarSecao('promocao')">
+            <i class="fa-solid fa-tags"></i> Promoção do Dia
+        </button>
+        <button onclick="mostrarSecao('pedido')">
+            <i class="fas fa-shopping-cart icon"></i> Pedido
+        </button>
+        <button onclick="mostrarSecao('pagamento')">
+            <i class="fa-solid fa-money-bill"></i> Pagamento
+        </button>
+        <button onclick="mostrarSecao('entrega')">
+            <i class="fas fa-truck"></i> Entrega
+        </button>
+    </div>
+
+    <!-- Secao de Cadastro -->
+    <div id="cadastro" class="hidden">
+        <h2>Criar Cadastro</h2>
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" placeholder="Digite o seu nome completo">
+        </div>
+        <div class="form-group">
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" placeholder="Digite o seu CPF">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Digite o seu email">
+        </div>
+        <button type="button" onclick="criarCadastro()">Confirmar</button>
+        <label id="mensagem-cadastro"></label>
+    </div>
+
+    <!-- Secao de Menu -->
+    <div id="menu" class="hidden">
+        <h2>Cardápio</h2>
+                <h3>Tradicionais:</h3>
+                    <p>Calabresa - R$ 30,00</p>
+                    <p>Portuguesa - R$ 35,00</p>
+                    <p>A Moda da Casa - R$ 40,00</p>
+                <h3>Especiais:</h3>
+                    <p>Frango com Requeijão - R$ 50,00</p>
+                    <p>Quatro Queijos - R$ 50,00</p>
+                    <p>Camarão - R$ 50,00</p>
+                <h3>Doces:</h3>
+                    <p>Chocolate - R$ 60,00</p>
+                    <p>Brigadeiro com Morango - R$ 60,00</p>
+                    <p>Romeu e Julieta - R$ 60,00</p>
+                <h3>Bordas Recheadas:</h3>
+                    <p>Cheddar - R$ 10,00</p>
+                    <p>Requeijão - R$ 10,00</p>
+                    <p>Cream Cheese - R$ 10,00</p>
+                    <p>Catupiry - R$ 10,00</p>
+                    <p>Chocolate ao Leite - R$ 10,00</p>
+                    <p>Chocolate Branco - R$ 10,00</p>  
+    </div>
+
+       <!-- Secao de Promocao -->
+    <div id="promocao" class="hidden">
+        <h2>Promoção do Dia</h2>
+        <p>Na compra de:</p>
+        <p>1 Pizza Especial + 1 Pizza Doce</p>
+        <p>Você ganha:</p>
+        <p>1 Refri de sua escolha!</p>
+    </div>
+
+
+    <!-- Secao de Pedido -->
+    <div id="pedido" class="hidden">
+        <h2>Pedido</h2>
+        <p>Selecione os sabores desejados:</p>
+        <input type="text" id="busca-menu" placeholder="Digite a opção do menu" oninput="buscarMenu()"/>
+        <div id="form-menu"></div>
+        <div id="form-pedido"></div>
+        <button onclick="adicionarOpcaoPedido()">Adicionar Opções</button>
+        <button onclick="confirmarPedido()">Confirmar Pedido</button>
+        <label id="mensagem-pedido"></label>
+        <div id="lista-pedidos"></div>
+    </div>
+
+    <!-- Secao de Pagamento -->
+    <div id="pagamento" class="hidden">
+        <h2>Pagamento</h2>
+        <p>Selecione a forma de pagamento:</p>
+        <div class="form-group">
+            <label for="forma-pagamento">Forma de Pagamento:</label>
+            <select id="forma-pagamento" name="forma-pagamento">
+                <option value="cartao-credito">Cartão de Crédito</option>
+                <option value="cartao-debito">Cartão de Débito</option>
+                <option value="dinheiro">Dinheiro</option>
+                <option value="pix">PIX</option>
+            </select>
+        </div>
+        <button onclick="confirmarPagamento()">Confirmar Pagamento</button>
+        <label id="mensagem-pagamento"></label>
+    </div>
+
+    <!-- Secao de Entrega -->
+    <div id="entrega" class="hidden">
+        <h2>Entrega</h2>
+        <p>Selecione o tipo de entrega:</p>
+        <form onsubmit="return false;">
+            <label>
+                <input type="radio" name="tipo-entrega" value="retirada" required> Retirada
+            </label>
+            <label>
+                <input type="radio" name="tipo-entrega" value="entrega" required> Entrega
+            </label>
+            <button type="button" onclick="confirmarTipoEntrega()">Confirmar</button>
+            <label id="mensagem-entrega"></label>
+        </form>
+    </div>
+</div>
+<script src="usuario.js"></script>
+</body>
+</html>
